@@ -45,7 +45,7 @@ def test_transforms():
   return test_transforms
 
 
-def data_loaders():
+def data_loaders(batch_size):
   train_data = datasets.MNIST('../data', train=True, download=True, transform=train_transforms)
   # The dataset named "MNIST" is being called from within the torchvision available datasets
   # MNIST is a dataset containing handwritten digits
@@ -54,9 +54,6 @@ def data_loaders():
   test_data = datasets.MNIST('../data', train=False, download=True, transform=test_transforms)
   # The test part of the dataset is downloaded to ../data location
   
-  batch_size = 32
-  # Batch Size is a tunable parameter that tells us how many images can be sent in parallel to the model. 
-  # This depends on the available memory and can be increased/decreased accordingly. This is tuned after the model is ran and based on available memory
   kwargs = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 2, 'pin_memory': True}
 
   train_loader = torch.utils.data.DataLoader(train_data, **kwargs)
@@ -66,19 +63,7 @@ def data_loaders():
   # test till help to check accuracy of our model
   return train_loader, test_loader
 
-def batch_plot(train_loader):
-  batch_data, batch_label = next(iter(train_loader)) 
 
-  fig = plt.figure()
-
-  for i in range(12):
-    plt.subplot(3,4,i+1)
-    plt.tight_layout()
-    plt.imshow(batch_data[i].squeeze(0), cmap='gray')
-    plt.title(batch_label[i].item())
-    plt.xticks([])
-    plt.yticks([])
-  return plt
 
 
 
