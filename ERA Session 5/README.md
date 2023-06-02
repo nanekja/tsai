@@ -11,21 +11,21 @@ The code is split into the following 3 files:
 &#x1F537;**Model File (model.py)**&#x1F537;
 
 
-https://github.com/partha-goswami/EVA8/blob/main/Session6/models/model.py
+https://github.com/nanekja/tsai/blob/master/ERA%20Session%205/model.py
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 &#x1F537;**Notebook File (S5.ipynb)**&#x1F537;
 
 
-https://github.com/partha-goswami/EVA8/blob/main/Session6/Session6_Advanced_Topics_Assignment_Solution.ipynb
+https://github.com/nanekja/tsai/blob/master/ERA%20Session%205/S5.ipynb
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 &#x1F537;**Utils File (utils.py)**&#x1F537;
 
 
-https://github.com/partha-goswami/EVA8/blob/main/Session6/models/model.py
+https://github.com/nanekja/tsai/blob/master/ERA%20Session%205/utils.py
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -111,10 +111,5 @@ Test set: Average loss: 0.0151, Accuracy: 9950/10000 (99.50%)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-&#x1F537;**Validation Loss & Accuracy Graph**&#x1F537;
 
-
-
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
