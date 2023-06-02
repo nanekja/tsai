@@ -61,7 +61,7 @@ def data_loaders(batch_size):
   # torch.utils.data.DataLoader wraps a dataset and provides access to the underlying data
   test_loader = torch.utils.data.DataLoader(test_data, **kwargs)
   # test till help to check accuracy of our model
-  return train_loader, test_loader
+  return train_loader
 
 
 
