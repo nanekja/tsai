@@ -45,25 +45,6 @@ def test_transforms():
   return test_transforms
 
 
-def data_loaders(batch_size):
-  train_data = datasets.MNIST('../data', train=True, download=True, transform=train_transforms)
-  # The dataset named "MNIST" is being called from within the torchvision available datasets
-  # MNIST is a dataset containing handwritten digits
-  # The training part of the dataset is downloaded to ../data location
-  # This is also the Extract (E) part of the ETL process where we are going to extract the dataset from raw data
-  test_data = datasets.MNIST('../data', train=False, download=True, transform=test_transforms)
-  # The test part of the dataset is downloaded to ../data location
-  
-  kwargs = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 2, 'pin_memory': True}
-
-  train_loader = torch.utils.data.DataLoader(train_data, **kwargs)
-  # trainloader is sort of "for" loop for us which will allow to look at or load a lot of images (~batch_size) at same time
-  # torch.utils.data.DataLoader wraps a dataset and provides access to the underlying data
-  test_loader = torch.utils.data.DataLoader(test_data, **kwargs)
-  # test till help to check accuracy of our model
-  return train_loader
-
-
 
 
 
