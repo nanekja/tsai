@@ -10,7 +10,8 @@ def get_device():
   If cuda(gpu) is available it would return that, otherwise it would return cpu.
   '''
   use_cuda = torch.cuda.is_available()
-  return torch.device("cuda" if use_cuda else "cpu")
+  print(torch.device("cuda" if use_cuda else "cpu"))
+  
 
 def train_transforms():
     # Train data transformations
@@ -30,6 +31,7 @@ def test_transforms():
     transforms.Normalize((0.1407,), (0.4081,))
     ])
     return test_transforms
+
 
 
 
