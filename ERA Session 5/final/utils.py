@@ -4,6 +4,7 @@ import torch
 import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 def get_device():
   '''
@@ -58,6 +59,9 @@ def return_dataset_images(train_loader, total_images):
     plt.xticks([])
     plt.yticks([])
 
+#this is from tqdm block
+def GetCorrectPredCount(pPrediction, pLabels):
+  return pPrediction.argmax(dim=1).eq(pLabels).sum().item()
 
 
 

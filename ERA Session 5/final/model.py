@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from utils import *
+
 
 class Net(nn.Module):
     #This defines the structure of the NN.
@@ -31,7 +33,48 @@ class Net(nn.Module):
         # This function uses an alternative formulation to compute the output and gradient correctly.
 
 def model_summary(model,input_size):
-    use_cuda = torch.cuda.is_available()
-    device = torch.device("cuda" if use_cuda else "cpu")
-    summary(model, input_size=(1, 28, 28))
-    
+    summary(model, input_size)
+
+# Data to plot accuracy and loss graphs
+train_losses = []
+test_losses = []
+train_acc = []
+test_acc = []
+
+test_incorrect_pred = {'images': [], 'ground_truths': [], 'predicted_vals': []}
+
+def train(model, device, train_loader, optimizer):
+  model.train()
+  # here we are using the train component of the model
+  pbar = tqdm(train_loader)
+
+  train_loss = 0
+  correct = 0
+  processed = 0
+
+  for batch_idx, (data, target) in enumerate(pbar):
+    # here above we are looping through each batch represented by batch id (like 4th batch, 5th batch, etc) and data is images of batch and target is the label  
+    data, target = data.to(device), target.to(device)
+    # since model is being trained on GPU, we need to send data and targets also to GPU. They can't be on CPU
+    optimizer.zero_grad()
+    # When we do back propagation, the gradients will be stored at one place and we need to initiate gradients as zero to begin withwhich is done in this step
+    # Predict
+    pred = model(data)
+
+    # Calculate loss
+    loss = F.nll_loss(pred, target)
+    # Computing loss using negative likelyhood loss function. Comparision is made between predicted output with targets
+    train_loss+=loss.item()
+
+    # Backpropagation
+    loss.backward()
+    # The loss is sent to backpropagation and here the gradients are computed based on the loss
+    optimizer.step()
+    # Applying the gradients to the parameters
+    correct += GetCorrectPredCount(pred, target)
+    processed += len(data)
+
+    pbar.set_description(desc= f'Train: Loss={loss.item():0.4f} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
+
+  train_acc.append(100*correct/processed)
+  train_losses.append(train_loss/len(train_loader))
