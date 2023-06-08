@@ -30,4 +30,8 @@ class Net(nn.Module):
         # While mathematically equivalent to log(softmax(x)), doing these two operations separately is slower and numerically unstable. 
         # This function uses an alternative formulation to compute the output and gradient correctly.
 
-
+def model_summary(model,input_size):
+    use_cuda = torch.cuda.is_available()
+    device = torch.device("cuda" if use_cuda else "cpu")
+    summary(model, input_size=(1, 28, 28))
+    
