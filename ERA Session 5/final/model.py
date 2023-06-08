@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import matplotlib.pyplot as plt
 from utils import *
 
 
@@ -78,3 +79,44 @@ def train(model, device, train_loader, optimizer):
 
   train_acc.append(100*correct/processed)
   train_losses.append(train_loss/len(train_loader))
+
+
+def test(model, device, test_loader):
+    model.eval()
+    # here we are involking the evaluation method of the model object
+    test_loss = 0
+    correct = 0
+
+    with torch.no_grad():
+        for batch_idx, (data, target) in enumerate(test_loader):
+            # Here we are looping through the images and labels in the test dataset
+            data, target = data.to(device), target.to(device)
+            # since model is being trained on GPU, we need to send data and targets also to GPU. They can't be on CPU
+            output = model(data)
+            # we are sending model output to output variable
+            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
+            # Computing loss using negative likelyhood loss function. Comparision is made between predicted output with targets
+            # We are also summing up batch loss
+            correct += GetCorrectPredCount(output, target)
+            # Summing up the correct predictions
+
+    test_loss /= len(test_loader.dataset)
+    test_acc.append(100. * correct / len(test_loader.dataset))
+    test_losses.append(test_loss)
+
+    print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset),
+        100. * correct / len(test_loader.dataset)))
+
+
+
+def draw_graphs():
+    fig, axs = plt.subplots(2,2,figsize=(15,10))
+    axs[0, 0].plot(train_losses)
+    axs[0, 0].set_title("Training Loss")
+    axs[1, 0].plot(train_acc)
+    axs[1, 0].set_title("Training Accuracy")
+    axs[0, 1].plot(test_losses)
+    axs[0, 1].set_title("Test Loss")
+    axs[1, 1].plot(test_acc)
+    axs[1, 1].set_title("Test Accuracy")
