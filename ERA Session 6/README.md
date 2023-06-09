@@ -93,7 +93,7 @@ Validation Accuracy: 99.47%\
 * Batch size of 32 is used `batch_size = 32`
 * The following sequence of operations are performed in the network
 
-* * nn.Conv2d(1, 64, 5, padding=0)  * *            **Channel Size: 1 > 64 ; Image Size: 28 > 24 \**
+nn.Conv2d(1, 64, 5, padding=0)           Channel Size: 1 > 64 ; Image Size: 28 > 24 \
 nn.ReLU(),\
 nn.BatchNorm2d(64),\
 nn.Dropout(0.25),\        
@@ -105,8 +105,11 @@ nn.ReLU(),\
 nn.BatchNorm2d(32),\
 nn.Conv2d(32, 10, 1, padding=0),	    Channel Size: 32 > 10 ; Image Size: 10 \
 nn.Conv2d(10, 10, 5),			    Channel Size: 10 ; Image Size: 10 > 6 \
-nn.ReLU(),
-nn.BatchNorm2d(10),
-nn.MaxPool2d(2, 2)
+nn.ReLU(),\
+nn.BatchNorm2d(10),\
+nn.MaxPool2d(2, 2)			    Channel Size: 10 ; Image Size: 6 > 3 \
 
-nn.Linear(90, 10)
+nn.Linear(90, 10)			    Fully Connected Layer Input Layer: 3*3*10=90 ; Output Layer: 10 \
+
+* Optimizer - SGD\
+* Learning Rate: 0.01
