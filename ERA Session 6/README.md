@@ -93,7 +93,7 @@ Validation Accuracy: 99.47%\
 * Batch size of 32 is used `batch_size = 32`
 * The following sequence of operations are performed in the network
 
-nn.Conv2d(1, 64, 5, padding=0)              Channel Size: 1 > 64 ; Image Size: 28 > 24 \
+* * nn.Conv2d(1, 64, 5, padding=0)  * *            **Channel Size: 1 > 64 ; Image Size: 28 > 24 \**
 nn.ReLU(),\
 nn.BatchNorm2d(64),\
 nn.Dropout(0.25),\        
