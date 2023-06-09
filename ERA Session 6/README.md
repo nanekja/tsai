@@ -16,7 +16,7 @@ A sample fully connected neural network with 1 input layer, 1 hidden layer and 1
 * E1 and E2 are the variances of the outputs a_o1 and a_o2 with respect to targets t1 and t2	
 * Combining E1 and E2 gives total Error	
 
-* To calculate the gradient of the error with respect to w5   :						**∂E_total/∂w5 = ∂(E1 + E2)/∂w5
+* To calculate the gradient of the error with respect to w5   :						** ∂E_total/∂w5 = ∂(E1 + E2)/∂w5 **
 * The partial derivative of E2 with respect to w5 is 0, hence :						∂E_total/∂w5 = ∂E1/∂w5	
 * The partial derivative of E1 can be expanded as             :						∂E_total/∂w5 = ∂E1/∂a_o1*∂a_o1/∂o1*∂o1/∂w5	
 * Calculating partial derivative of E1 with a_o1              :						∂E1/∂a_o1 =  ∂(½ * (t1 - a_o1)²)/∂a_o1 = (a_01 - t1)	
