@@ -5,8 +5,7 @@
 ##### **Mathematics behind Back Propagation**
 
 ![image](https://github.com/nanekja/tsai/assets/12238843/2423f84c-1331-41dc-8d3a-83a0d4f704b9)
-
-
+A sample fully connected neural network with 1 input layer, 1 hidden layer and 1 output layer
 
 
 
