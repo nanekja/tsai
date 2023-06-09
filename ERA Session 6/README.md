@@ -44,6 +44,26 @@ A sample fully connected neural network with 1 input layer, 1 hidden layer and 1
 * Total error with w4 after substitution is                   :						`∂E_total/∂w4 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i2`	
 
 
+Loss when Learning Rate: 0.1
+![image](https://github.com/nanekja/tsai/assets/12238843/bb04500c-bb42-425a-9f2e-bdd64e5a699e)
+
+Loss when Learning Rate: 0.2
+![image](https://github.com/nanekja/tsai/assets/12238843/e91fb5d6-7b3c-4d85-a419-a91a5464b935)
+
+Loss when Learning Rate: 0.5
+![image](https://github.com/nanekja/tsai/assets/12238843/9fa769cb-24e9-4597-a786-3a02a7e61b8a)
+
+Loss when Learning Rate: 0.8
+![image](https://github.com/nanekja/tsai/assets/12238843/3d8c9b9a-ad28-4ed9-9da1-ca064ee3dde4)
+
+Loss when Learning Rate: 1
+![image](https://github.com/nanekja/tsai/assets/12238843/ecf7d17e-d5a5-4647-838e-dba2faa52b30)
+
+Loss when Learning Rate: 2
+![image](https://github.com/nanekja/tsai/assets/12238843/718411d0-8ff2-4999-9ad6-4693c5d4e3e3)
+
+
+
 
 
 
