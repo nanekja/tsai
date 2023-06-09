@@ -86,4 +86,27 @@ Epochs: 20\
 Validation Accuracy: 99.47%\
 ![image](https://github.com/nanekja/tsai/assets/12238843/818b9667-6f8b-424e-a706-8a185e41f312)
 
+* This model is ran on a CPU but can also be run on a GPU
+* The dataset named "MNIST" is being used from within the torchvision available datasets
+* MNIST is a dataset containing handwritten digits
+* Normalization is done on training and validation images to bring lot of bright or dull images to similar level of brightness of other images `transforms.Normalize((0.1307,), (0.3081,))`
+* Batch size of 32 is used `batch_size = 32`
+* The following sequence of operations are performed in the network
 
+nn.Conv2d(1, 64, 5, padding=0)              Channel Size: 1 > 64 ; Image Size: 28 > 24 \
+nn.ReLU(),\
+nn.BatchNorm2d(64),\
+nn.Dropout(0.25),\        
+nn.MaxPool2d(2, 2)			    Channel Size: 64 ; Image Size: 24 > 12 \
+
+nn.Conv2d(64, 32, 1, padding=0),	    Channel Size: 64 > 32 ; Image Size: 12 \
+nn.Conv2d(32, 32, 3, padding=0),	    Channel Size: 32 ; Image Size: 12 > 10 \
+nn.ReLU(),\
+nn.BatchNorm2d(32),\
+nn.Conv2d(32, 10, 1, padding=0),	    Channel Size: 32 > 10 ; Image Size: 10 \
+nn.Conv2d(10, 10, 5),			    Channel Size: 10 ; Image Size: 10 > 6 \
+nn.ReLU(),
+nn.BatchNorm2d(10),
+nn.MaxPool2d(2, 2)
+
+nn.Linear(90, 10)
