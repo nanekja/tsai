@@ -4,6 +4,7 @@ import torch
 import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 def get_device():
   '''
