@@ -8,25 +8,50 @@ from utils import *
 
 
 class Net(nn.Module):
+    #This defines the structure of the NN.
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, 3, padding=1) #input -? OUtput? RF
-        self.conv2 = nn.Conv2d(32, 64, 3, padding=1)
-        self.pool1 = nn.MaxPool2d(2, 2)
-        self.conv3 = nn.Conv2d(64, 128, 3, padding=1)
-        self.conv4 = nn.Conv2d(128, 256, 3, padding=1)
-        self.pool2 = nn.MaxPool2d(2, 2)
-        self.conv5 = nn.Conv2d(256, 512, 3)
-        self.conv6 = nn.Conv2d(512, 1024, 3)
-        self.conv7 = nn.Conv2d(1024, 10, 3)
+        self.conv1 = nn.Sequential(
+			nn.Conv2d(1, 64, 5, padding=0),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.25),           
+			
+            nn.MaxPool2d(2, 2)
 
-    def forward(self, x):
-        x = self.pool1(F.relu(self.conv2(F.relu(self.conv1(x)))))
-        x = self.pool2(F.relu(self.conv4(F.relu(self.conv3(x)))))
-        x = F.relu(self.conv6(F.relu(self.conv5(x))))
-        x = F.relu(self.conv7(x))
-        x = x.view(-1, 10)
-        return F.log_softmax(x)
+			)
+			
+        self.conv2 = nn.Sequential(
+
+			nn.Conv2d(64, 32, 1, padding=0),
+
+            nn.Conv2d(32, 32, 3, padding=0),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+
+            nn.Conv2d(32, 10, 1, padding=0),
+
+			nn.Conv2d(10, 10, 5),
+            nn.ReLU(),
+            nn.BatchNorm2d(10),
+
+            nn.MaxPool2d(2, 2)
+
+			)
+        
+        self.fc = nn.Sequential(
+            nn.Linear(90, 10)
+			)
+
+		
+    def forward(self, x):                                 													# Channel Size | RF | Jump Parameter
+        x = self.conv1(x)                      																# 28 > 26 | 1>3 | 1>1
+        x = self.conv2(x)    							   													# 26 > 24 > 12 | 3>5>6 | 1>1>2		
+        x = x.view(-1, 90) 
+        x = self.fc(x)
+        x = F.log_softmax(x, dim=1)               													
+        
+        return x
 
 
 def draw_graphs(train_losses, train_acc, test_losses, test_acc):
