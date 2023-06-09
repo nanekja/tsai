@@ -72,18 +72,18 @@ Loss when Learning Rate: 2\
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### **Part B**
 
-Model for MNIST Dataset with following constraints:
-99.4% validation accuracy
-Less than 20k Parameters
-Less than 20 Epochs
-Have used BN, Dropout,
-(Optional): a Fully connected layer, have used GAP
+Model for MNIST Dataset with following constraints:\
+99.4% validation accuracy\
+Less than 20k Parameters\
+Less than 20 Epochs\
+Have used BN, Dropout\
+(Optional): a Fully connected layer, have used GAP\
 
 * S6.ipynb - A notebook file containing the model execution and accuracies
 
-Model Parameters: 16,954
-Epochs: 20
-Validation Accuracy: 99.47%
+Model Parameters: 16,954\
+Epochs: 20\
+Validation Accuracy: 99.47%\
 ![image](https://github.com/nanekja/tsai/assets/12238843/818b9667-6f8b-424e-a706-8a185e41f312)
 
 
