@@ -15,13 +15,35 @@ A sample fully connected neural network with 1 input layer, 1 hidden layer and 1
 * a_o1 and a_o2 are resultant of activation function (in this case sigmoid) applied to o1 and o2 respectively	
 * E1 and E2 are the variances of the outputs a_o1 and a_o2 with respect to targets t1 and t2	
 * Combining E1 and E2 gives total Error	
-**************************************************************************
+
 * To calculate the gradient of the error with respect to w5   :						`∂E_total/∂w5 = ∂(E1 + E2)/∂w5` 
 * The partial derivative of E2 with respect to w5 is 0, hence :						`∂E_total/∂w5 = ∂E1/∂w5`	
 * The partial derivative of E1 can be expanded as             :						`∂E_total/∂w5 = ∂E1/∂a_o1*∂a_o1/∂o1*∂o1/∂w5`	
 * Calculating partial derivative of E1 with a_o1              :						`∂E1/∂a_o1 =  ∂(½ * (t1 - a_o1)²)/∂a_o1 = (a_01 - t1)`	
 * Partial derivative of σ is σ(1-σ) and hence                 :						`∂a_o1/∂o1 =  ∂(σ(o1))/∂o1 = a_o1 * (1 - a_o1)`	
 * Calculating partial derivative of o1 with w5                :						`∂o1/∂w5 = a_h1`	
+
+* From above, the expanded partial derivative of error with w5:						`∂E_total/∂w5 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h1`
+* Similarly, the expanded partial derivative of error with w6 :						`∂E_total/∂w6 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h2`
+* Similarly, the expanded partial derivative of error with w7 :						`∂E_total/∂w7 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h1`
+* Similarly, the expanded partial derivative of error with w8 :						`∂E_total/∂w8 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h2`
+
+* Writing the full expansion of E1 with respect to a_h1       :						`∂E1/∂a_h1 = ∂E1/∂a_o1 * ∂a_o1/∂o1 * ∂o1/∂w5 * ∂w5/∂a_h1`	
+* Substituting the equations from above                       :						`∂E1/∂a_h1 = (a_01 - t1) * a_o1 * (1 - a_o1) * w5`	
+* Similarly E2 with respect to a_h1 is                        :						`∂E2/∂a_h1 = (a_02 - t2) * a_o2 * (1 - a_o2) * w7`	
+* Total error with respect to a_h1 is sum of above 2 eq's     :						`∂E_total/∂a_h1 = (a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7`	
+* Similarily the total error with respect to a_h2 is          :						`∂E_total/∂a_h2 = (a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8`	
+							
+* Expression for total error with w1 is                       :						`∂E_total/∂w1 = ∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w1`	
+* Similarily total error with w2                              :						`∂E_total/∂w2 = ∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w2`	
+* Similarily total error with w3                              :						`∂E_total/∂w3 = ∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w3`	
+							
+* Total error with w1 after substitution is                   :						`∂E_total/∂w1 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i1`	
+* Total error with w2 after substitution is                   :						`∂E_total/∂w2 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i2`	
+* Total error with w3 after substitution is                   :						`∂E_total/∂w3 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i1`	
+* Total error with w4 after substitution is                   :						`∂E_total/∂w4 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i2`	
+
+
 
 
 
