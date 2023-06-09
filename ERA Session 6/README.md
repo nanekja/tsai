@@ -4,6 +4,7 @@
 
 ##### **Mathematics behind Back Propagation**
 
+![image](https://github.com/nanekja/tsai/assets/12238843/b462cc47-7005-4d34-9536-7698e958f5a0)
 
 
 
