@@ -83,4 +83,3 @@ def draw_graphs(train_losses, train_acc, test_losses, test_acc):
   axs[1, 1].plot(test_acc)
   axs[1, 1].set_title("Test Accuracy")
 
-
