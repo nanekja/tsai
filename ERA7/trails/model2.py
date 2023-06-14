@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 from torchsummary import summary
 from tqdm import tqdm
-from utils1 import *
+from utils2 import *
 
 
 class Net(nn.Module):
