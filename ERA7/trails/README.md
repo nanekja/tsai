@@ -4,7 +4,7 @@
 ### Files:
 m1.ipynb\
 model1.py\
-utils1.py\
+utils1.py
 
 ### Target:
 * Get the set-up right
