@@ -16,7 +16,7 @@ utils1.py
 ### Results:
 * Parameters: 6.3M
 * Best Training Accuracy: 99.99
-* Best Test Accuracy: 99.21
+* Best Test Accuracy: 99.31
 
 ### Analysis:
 * Extremely Heavy Model for such a problem
