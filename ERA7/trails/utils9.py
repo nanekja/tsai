@@ -11,6 +11,7 @@ def train_transforms():
   # Train data transformations
   train_transforms = transforms.Compose([
     # This is the Transform (T) part of the ETL process where we are transforming the data into tensors
+    transforms.RandomRotation((-7.0, 7.0), fill=(1,)),
     transforms.ToTensor(),
     # Immediately after downloading the dataset, we are converting it into tensor
     # Converting to Tensor facilitates following: a) It allows porting data to GPU b) It standardizes the values from 0-255 to 0-1
