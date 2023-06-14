@@ -68,3 +68,25 @@ utils3.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 4**&#x1F537;
 
+### Files:
+m4.ipynb\
+model4.py\
+utils4.py
+
+### Target:
+
+* Add Batch-norm to increase model efficiency
+
+### Results:
+* Parameters: 10.9K
+* Best Train Accuracy: 99.76
+* Best Test Accuracy: 99.28
+
+### Analysis:
+* We have started to see over-fitting now
+* Even if the model is pushed further, it won't be able to get to 99.4
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 5**&#x1F537;
+
+
