@@ -155,3 +155,28 @@ utils7.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 8**&#x1F537;
 
+### Files:
+m8.ipynb\
+model8.py\
+utils8.py
+
+### Target:
+
+* Increase model capacity at the end (add layer after GAP)
+* Perform MaxPooling at RF=5
+* Fix DropOut, add it to each layer
+
+
+### Results:
+* Parameters: 13.8K
+* Best Train Accuracy: 99.21
+* Best Test Accuracy: 99.37
+
+### Analysis:
+* Works!
+* But we're not seeing 99.4 or more as often as we'd like. We can further improve it. 
+* The model is not over-fitting at all. 
+* Seeing image samples, we can see that we can add slight rotation. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 9**&#x1F537;
