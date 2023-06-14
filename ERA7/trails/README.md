@@ -25,3 +25,25 @@ utils1.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 2**&#x1F537;
 
+### Files:
+m2.ipynb\
+model2.py\
+utils2.py
+
+### Target:
+
+* Get the basic skeleton right. We will try and avoid changing this skeleton as much as possible.
+* No fancy stuff
+
+### Results:
+* Parameters: 194k
+* Best Train Accuracy: 99.08
+* Best Test Accuracy: 98.85
+
+### Analysis:
+* The model is still large, but working. 
+* We see some over-fitting
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 3**&#x1F537;
+
