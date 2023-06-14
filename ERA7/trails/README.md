@@ -111,3 +111,24 @@ utils5.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 6**&#x1F537;
 
+### Files:
+m6.ipynb\
+model6.py\
+utils6.py
+
+### Target:
+
+* Add GAP and remove the last BIG kernel
+
+### Results:
+* Parameters: 6K
+* Best Train Accuracy: 98.53
+* Best Test Accuracy: 98.3
+
+### Analysis:
+* Adding Global Average Pooling reduces accuracy - WRONG
+* We are comparing a 10.9k model with 6k model. Since we have reduced model capacity, a reduction in performance is expected.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 7**&#x1F537;
+
