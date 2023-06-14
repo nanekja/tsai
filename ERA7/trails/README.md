@@ -89,4 +89,25 @@ utils4.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 5**&#x1F537;
 
+### Files:
+m5.ipynb\
+model5.py\
+utils5.py
+
+### Target:
+
+* Add Regularization, Dropout
+
+### Results:
+* Parameters: 10.9K
+* Best Train Accuracy: 99.3
+* Best Test Accuracy: 99.17
+
+### Analysis:
+* Regularization working.
+* But with the current capacity, not possible to push it further.
+* We are also not using GAP, but depending on a BIG-sized kernel
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 6**&#x1F537;
 
