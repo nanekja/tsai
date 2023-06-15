@@ -20,19 +20,19 @@ class Net(nn.Module):
         # TRANSITION BLOCK 1
         self.pool1 = nn.MaxPool2d(2, 2) # output_size = 12
         self.convblock2 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(1, 1), padding=0, bias=False),
-            nn.BatchNorm2d(32),
+            nn.Conv2d(in_channels=64, out_channels=16, kernel_size=(1, 1), padding=0, bias=False),
+            nn.BatchNorm2d(16),
             nn.ReLU()
         ) # output_size = 12
 
         # CONVOLUTION BLOCK 2
         self.convblock3 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
-            nn.BatchNorm2d(32),
+            nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
+            nn.BatchNorm2d(16),
             nn.ReLU()
         ) # output_size = 10
         self.convblock4 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
+            nn.Conv2d(in_channels=16, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
             nn.BatchNorm2d(10),
             nn.ReLU()
         ) # output_size = 10
@@ -48,15 +48,16 @@ class Net(nn.Module):
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size=3)
         ) # output_size = 1
-        self.dropout = nn.Dropout(0.25)
+        self.dropout = nn.Dropout(0.1)
    
 
     def forward(self, x):
         x = self.convblock1(x)
-        x = self.dropout(x)
+
         x = self.pool1(x)
         x = self.convblock2(x)
         x = self.convblock3(x)
+        x = self.dropout(x)
         x = self.convblock4(x)
         x = self.convblock5(x)
         x = self.pool2(x)        
