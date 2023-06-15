@@ -31,7 +31,6 @@ model2.py\
 utils2.py
 
 ### Target:
-
 * Get the basic skeleton right. We will try and avoid changing this skeleton as much as possible.
 * No fancy stuff
 
@@ -53,7 +52,6 @@ model3.py\
 utils3.py
 
 ### Target:
-
 * Make the model lighter
 
 ### Results:
@@ -74,7 +72,6 @@ model4.py\
 utils4.py
 
 ### Target:
-
 * Add Batch-norm to increase model efficiency
 
 ### Results:
@@ -95,7 +92,6 @@ model5.py\
 utils5.py
 
 ### Target:
-
 * Add Regularization, Dropout
 
 ### Results:
@@ -117,7 +113,6 @@ model6.py\
 utils6.py
 
 ### Target:
-
 * Add GAP and remove the last BIG kernel
 
 ### Results:
@@ -138,7 +133,6 @@ model7.py\
 utils7.py
 
 ### Target:
-
 * Increase model capacity. Add more layers at the end. 
 
 ### Results:
@@ -161,7 +155,6 @@ model8.py\
 utils8.py
 
 ### Target:
-
 * Increase model capacity at the end (add layer after GAP)
 * Perform MaxPooling at RF=5
 * Fix DropOut, add it to each layer
@@ -180,3 +173,23 @@ utils8.py
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 9**&#x1F537;
+
+### Files:
+m9.ipynb\
+model9.py\
+utils9.py
+
+### Target:
+* Add rotation, our guess is that 5-7 degrees should be sufficient.
+
+### Results:
+* Parameters: 13.8K
+* Best Train Accuracy: 98.97
+* Best Test Accuracy: 99.45
+
+### Analysis:
+* The model is under-fitting now. This is fine, as we know we have made our train data harder. 
+* The test accuracy is also up, which means our test data had few images which had transformation difference w.r.t. train dataset
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&#x1F537;**Model 10**&#x1F537;
