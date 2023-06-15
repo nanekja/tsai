@@ -53,7 +53,6 @@ class Net(nn.Module):
 
     def forward(self, x):
         x = self.convblock1(x)
-
         x = self.pool1(x)
         x = self.convblock2(x)
         x = self.convblock3(x)
