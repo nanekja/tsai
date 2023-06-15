@@ -193,3 +193,20 @@ utils9.py
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 10**&#x1F537;
+
+### Files:
+m10.ipynb\
+model10.py\
+utils10.py
+
+### Target:
+* Add LR Scheduler
+
+### Results:
+* Parameters: 13.8K
+* Best Train Accuracy: 98.97
+* Best Test Accuracy: 99.42
+
+### Analysis:
+* Finding a good LR schedule is hard. We have tried to make it effective by reducing LR by 10th after the 6th epoch.
+* It did help in getting to 99.4 or faster, but the final accuracy is not more than 99.5. Possibly a good scheduler can do wonders here!
