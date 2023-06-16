@@ -49,7 +49,10 @@ class Net(nn.Module):
             nn.BatchNorm2d(10),
             nn.ReLU()
         ) # output_size = 8
-        self.pool2 = nn.MaxPool2d(2, 2) # output_size = 4
+        self.convblock7 = nn.Sequential(
+            nn.Conv2d(in_channels=10, out_channels=10, kernel_size=(5, 5), padding=0, bias=False),
+
+        ) # output_size = 4
 
         # OUTPUT BLOCK
 
@@ -64,12 +67,11 @@ class Net(nn.Module):
         x = self.convblock2(x)
         x = self.convblock3(x)
         x = self.pool1(x)
-
-        x = self.dropout(x)
         x = self.convblock4(x)
+        x = self.dropout(x)
         x = self.convblock5(x)
         x = self.convblock6(x)
-        x = self.pool2(x)        
+        x = self.convblock7(x) 
         x = self.gap(x)
         x = x.view(-1, 10)
         return F.log_softmax(x, dim=-1)
