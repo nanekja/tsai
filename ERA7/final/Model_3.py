@@ -64,14 +64,13 @@ class Net(nn.Module):
 
     def forward(self, x):
         x = self.convblock1(x)
-        x = self.dropout(x)
         x = self.convblock2(x)
         x = self.dropout(x)
         x = self.convblock3(x)
         x = self.pool1(x)
         x = self.convblock4(x)
-        x = self.dropout(x)
         x = self.convblock5(x)
+        x = self.dropout(x)
         x = self.convblock6(x)
 
         x = self.convblock7(x) 
