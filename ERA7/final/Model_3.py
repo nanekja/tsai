@@ -28,7 +28,7 @@ class Net(nn.Module):
         # CONVOLUTION BLOCK 2
         self.convblock3 = nn.Sequential(
             nn.Conv2d(in_channels=16, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
-            nn.BatchNorm2d(16),
+            nn.BatchNorm2d(32),
             nn.ReLU()
         ) # output_size = 10
         self.convblock4 = nn.Sequential(
