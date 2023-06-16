@@ -64,6 +64,7 @@ class Net(nn.Module):
         x = self.dropout(x)
         x = self.convblock4(x)
         x = self.convblock5(x)
+        x = self.dropout(x)
         x = self.convblock6(x)
         x = self.pool2(x)        
         x = self.gap(x)
