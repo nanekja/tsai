@@ -40,27 +40,27 @@ class Net(nn.Module):
             nn.BatchNorm2d(16),
             nn.ReLU()
         ) # output_size = 10
-        
+
         # OUTPUT BLOCK
         self.convblock5 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=8, kernel_size=(1, 1), padding=0, bias=False),
+            nn.Conv2d(in_channels=16, out_channels=8, kernel_size=(3, 3), padding=0, bias=False),
             nn.BatchNorm2d(8),
             nn.ReLU()
-        ) # output_size = 10
+        ) # output_size = 8
         self.convblock6 = nn.Sequential(
             nn.Conv2d(in_channels=8, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
             nn.BatchNorm2d(16),
             nn.ReLU()
-        ) # output_size = 8
+        ) # output_size = 6
         self.convblock7 = nn.Sequential(
             nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
             nn.BatchNorm2d(16),
             nn.ReLU()
-        ) # output_size = 6
+        ) # output_size = 4
         self.pool2 = nn.MaxPool2d(2, 2) # output_size = 3
-         # output_size = 3
+         # output_size = 2
         self.gap = nn.Sequential(
-            nn.AvgPool2d(kernel_size=3)
+            nn.AvgPool2d(kernel_size=2)
         ) # output_size = 1
         self.dropout = nn.Dropout(0.1)
    
