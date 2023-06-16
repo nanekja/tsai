@@ -45,4 +45,18 @@ utils.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Model 3**&#x1F537;
 
+### Files:
+m3.ipynb\
+Model_3.py\
+utils.py
 
+### Target:
+* Consistent accuracy
+
+### Results:
+* Parameters: 7616
+* Best Training Accuracy: 99.08
+* Best Test Accuracy: 99.38
+
+### Analysis:
+* Didn't reach expected accuracy
