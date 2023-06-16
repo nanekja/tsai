@@ -34,8 +34,8 @@ class Net(nn.Module):
             nn.ReLU()
         ) # output_size = 10
         self.convblock4 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
-            nn.BatchNorm2d(32),
+            nn.Conv2d(in_channels=16, out_channels=16, kernel_size=(3, 3), padding=0, bias=False),
+            nn.BatchNorm2d(16),
             nn.ReLU()
         ) # output_size = 8
 
@@ -63,6 +63,7 @@ class Net(nn.Module):
         x = self.dropout(x)
         x = self.convblock2(x)
         x = self.pool1(x)
+
         x = self.convblock3(x)
         x = self.convblock4(x)
         x = self.dropout(x)
