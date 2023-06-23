@@ -24,8 +24,8 @@ class Net(nn.Module):
 
         # TRANSITION BLOCK 1
         self.convblock3 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(1, 1), padding=0, bias=False),
-            nn.BatchNorm2d(32),
+            nn.Conv2d(in_channels=64, out_channels=16, kernel_size=(1, 1), padding=0, bias=False),
+            nn.BatchNorm2d(16),
             nn.ReLU()
         ) # output_size = 32
         self.pool1 = nn.MaxPool2d(2, 2) # output_size = 16
@@ -33,7 +33,7 @@ class Net(nn.Module):
 
         # CONVOLUTION BLOCK 2
         self.convblock4 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=1, bias=False),
+            nn.Conv2d(in_channels=16, out_channels=32, kernel_size=(3, 3), padding=1, bias=False),
             nn.BatchNorm2d(32),
             nn.ReLU()
         ) # output_size = 16
@@ -50,7 +50,7 @@ class Net(nn.Module):
 
         # TRANSITION BLOCK 2
         self.convblock7 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
+            nn.Conv2d(in_channels=32, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
             nn.BatchNorm2d(10),
             nn.ReLU()
         ) # output_size = 14

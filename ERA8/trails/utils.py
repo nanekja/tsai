@@ -52,6 +52,22 @@ def draw_graphs(train_losses, train_acc, test_losses, test_acc):
     axs[1, 1].plot(test_acc)
     axs[1, 1].set_title("Test Accuracy")
 
+def convert_image_np(inp, mean, std):
+    """Convert normalized tensor to numpy image for display.
+
+    Args:
+        inp (tensor): Tensor image
+        mean(np array): numpy array of mean of dataset
+        std(np array): numpy array of standard deviation of dataset
+
+    Returns:
+        np array: a numpy image
+    """
+
+    inp = inp.numpy().transpose((1, 2, 0))
+    inp = std * inp + mean
+    inp = np.clip(inp, 0, 1)
+    return inp
 
 def plot_misclassified(model, test_loader, classes, device, dataset_mean, dataset_std, no_misclf=20, plot_size=(4,5), return_misclf=False):
     """Plot the images are wrongly clossified by model
