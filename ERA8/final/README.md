@@ -26,12 +26,8 @@ utils.py
 * Graphs:
   ![image](https://github.com/nanekja/tsai/assets/12238843/e0a4534a-b33a-49ac-91a8-0f7b828767f5)
 
-* MisClassified Images:
+* MisClassified Images:\
   ![image](https://github.com/nanekja/tsai/assets/12238843/d87c4d64-a375-4fd5-823f-edcf821c5725)
-
-
-### Analysis:
-
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Layer Normalization**&#x1F537;
@@ -56,12 +52,8 @@ utils.py
 * Graphs:
 ![image](https://github.com/nanekja/tsai/assets/12238843/8e9896ce-7b0c-4bbf-92a8-23b97920f0ca)
 
-* MisClassified Images:
+* MisClassified Images:\
 ![image](https://github.com/nanekja/tsai/assets/12238843/0ea6ebcc-830f-4356-8562-d18d18b015e3)
-
-
-### Analysis:
-
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &#x1F537;**Group Normalization**&#x1F537;
@@ -86,11 +78,11 @@ utils.py
 * Graphs:
 ![image](https://github.com/nanekja/tsai/assets/12238843/2f975c9b-09bf-4871-a22a-924c139a2795)
 
-* MisClassified Images:
+* MisClassified Images:\
 ![image](https://github.com/nanekja/tsai/assets/12238843/9246b98d-eedc-494f-b693-b6c253903a77)
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Analysis:
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
