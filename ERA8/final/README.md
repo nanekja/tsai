@@ -85,4 +85,5 @@ utils.py
 
 ### Analysis:
 
-
+The results of Batch Normalization is superior over other normalization techniques as the achieved accuracy is higher and has relatively faster convergence.
+The Layer Normalization comes next in the order of efficiency as its accuracy is better than the Group Normalization.
