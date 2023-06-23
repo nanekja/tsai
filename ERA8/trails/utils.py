@@ -81,8 +81,8 @@ def plot_misclassified(model, test_loader, classes, device, dataset_mean, datase
   
     while count<no_misclf:
         img_model, label = test_loader.dataset[k]
-        #pred = model(img_model.unsqueeze(0).to(device)) # Prediction
-        pred = model(img.unsqueeze(0).to(device)) # Prediction
+        pred = model(img_model.unsqueeze(0).to(device)) # Prediction
+        #pred = model(img.unsqueeze(0).to(device)) # Prediction
         pred = pred.argmax().item()
 
         k += 1
