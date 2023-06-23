@@ -53,45 +53,58 @@ def draw_graphs(train_losses, train_acc, test_losses, test_acc):
   axs[1, 1].set_title("Test Accuracy")
 
 
-def get_mis_classified_byloader(model, device, data_loader):
-    model.eval()
-    missed_images = []  # will contain list of batches, for a given batch will return list of indices not predicted correctly
-    # empty list will indicate no mis predictions
-    pred_labels = []  # contains list of predicted labels by each batch
-    data_images = []  # contains list of images by each batch for plotting
-    target_labels = []  # contains list of target labels by batch
-    with torch.no_grad():
-        for data, target in data_loader:
-            data, target = data.to(device), target.to(device)
-            output = model(data)
-            # test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
-            pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
-            # missed_images.append(torch.where(torch.not_equal(pred.squeeze(),target).cpu()))
-            misses = torch.where(torch.not_equal(pred.squeeze(), target))
-            data_images.append(data[misses].cpu())
-            target_labels.append(target[misses].cpu())
-            pred_labels.append(pred[misses].cpu())
+def plot_misclassified(model, test_loader, classes, device, dataset_mean, dataset_std, no_misclf=20, plot_size=(4,5), return_misclf=False):
+    """Plot the images are wrongly clossified by model
 
-    pred_labels = [x.item() for item in pred_labels for x in item]
-    target_labels = [x.item() for item in target_labels for x in item]
-    data_images = [x for item in data_images for x in item]
+    Args:
+        model (instance): torch instance of defined model (pre trained)
+        test_loader (instace): torch data loader of testing set
+        classes (dict or list): classes in the dataset
+                if dict:
+                    key - class id
+                    value - as class name
+                elif list:
+                    index of list correspond to class id and name
+        device (str): 'cpu' or 'cuda' device to be used
+        dataset_mean (tensor or np array): mean of dataset
+        dataset_std (tensor or np array): std of dataset
+        no_misclf (int, optional): number of misclassified images to plot. Defaults to 20.
+        plot_size (tuple): tuple containing size of plot as rows, columns. Defaults to (4,5)
+        return_misclf (bool, optional): True to return the misclassified images. Defaults to False.
 
-    return data_images, pred_labels, target_labels
+    Returns:
+        list: list containing misclassified images as np array if return_misclf True
+    """
+    count = 0
+    k = 0
+    misclf = list()
+  
+    while count<no_misclf:
+        img_model, label = test_loader.dataset[k]
+        pred = model(img_model.unsqueeze(0).to(device)) # Prediction
+        # pred = model(img.unsqueeze(0).to(device)) # Prediction
+        pred = pred.argmax().item()
 
+        k += 1
+        if pred!=label:
+            img = convert_image_np(
+                img_model, dataset_mean, dataset_std)
+            misclf.append((img_model, img, label, pred))
+            count += 1
+    
+    rows, cols = plot_size
+    figure = plt.figure(figsize=(cols*3,rows*3))
 
-def plot_misclassified(image_data, targeted_labels, predicted_labels, classes, no_images):
-    no_images = min(no_images, len(predicted_labels))
+    for i in range(1, cols * rows + 1):
+        _, img, label, pred = misclf[i-1]
 
-    figure = plt.figure(figsize=(12, 5))
+        figure.add_subplot(rows, cols, i) # adding sub plot
+        plt.title(f"Pred label: {classes[pred]}\n True label: {classes[label]}") # title of plot
+        plt.axis("off") # hiding the axis
+        plt.imshow(img, cmap="gray") # showing the plot
 
-    for index in range(1, no_images + 1):
-        image = denormalize(image_data[index - 1]).numpy().transpose(1, 2, 0)
-        plt.subplot(2, 5, index)
-
-        plt.imshow(image)
-        plt.tick_params(left=False, right=False, labelleft=False,
-                        labelbottom=False, bottom=False)
-        title = "Target:" + str(classes[targeted_labels[index - 1]]) + "\nPredicted:" + str(
-            classes[predicted_labels[index - 1]])
-        plt.title(title)
-
+    plt.tight_layout()
+    plt.show()
+    
+    if return_misclf:
+        return misclf
