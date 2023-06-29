@@ -12,14 +12,14 @@ class Net(nn.Module):
         super(Net, self).__init__()
         # CONVOLUTION BLOCK 1 input 32/1/1
         self.convblock1 = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding='same', stride=1, bias=False),
+            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding=1, stride=1, bias=False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
-        ) # output_size = 32/3
+        ) # Input: 32x32x3 | Output: 32x32x32 | RF: 3x3
  
         self.convblock2 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding='same', stride=1, dilation=2, bias=False),
+            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=1, stride=1, dilation=2, bias=False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
