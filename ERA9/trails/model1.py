@@ -72,7 +72,7 @@ class Net(nn.Module):
         ) # Input: 8x8x64 | Output: 6x6x32 | RF: 35 [27+(3-1)*4]
 
         self.convblock9 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=1, kernel_size=(3, 3), padding=0, stride = 2, bias=False),
+            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=0, stride = 2, bias=False),
             nn.ReLU(),
 #            nn.BatchNorm2d(32),
 #            nn.Dropout(dropout_value)
@@ -81,25 +81,29 @@ class Net(nn.Module):
         
         # OUTPUT BLOCK
         self.gap = nn.Sequential(
-            nn.AvgPool2d(kernel_size=4)
-        ) # output_size = 1
+            nn.AdaptiveAvgPool2d(1)
+        )  # Input: 4x4x32 | Output: 1x1x32 | RF: 67 [43+(4-1)*8]
 
-
+        self.fc = nn.Sequential(
+            nn.Linear(32, 10)
+        )
 
 
     def forward(self, x):
         x = self.convblock1(x)
-        x = x + self.convblock2(x)
+        x = self.convblock2(x)
         x = self.convblock3(x)
 
         x = self.convblock4(x)
-        x = x + self.convblock5(x)
+        x = self.convblock5(x)
         x = self.convblock6(x)
 
         x = self.convblock7(x)
-        x = x + self.convblock8(x)
-        x = self.convblock9(x)
+        x = self.convblock8(x)
+        x = x + self.convblock9(x)
 
+        x = self.gap(x)
+        x = x.view(-1, 32)
+        x = self.fc(x)
 
-        x = x.view(-1, 10)
-        return F.log_softmax(x, dim=-1)
+        return x
