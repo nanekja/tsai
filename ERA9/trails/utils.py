@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from torchvision.utils import make_grid
-
+import torchvision
 from torch.utils.data import Dataset
 
 
