@@ -23,13 +23,15 @@ class Net(nn.Module):
             nn.BatchNorm2d(64),
             nn.Dropout2d(dropout),
 
-            nn.Conv2d(64, 32,1, stride=2), # Input: 32x32x64 | Output: 16x16x32 | RF: 5x5
+            nn.Conv2d(64, 64, 3, padding=1, stride=2), # Input: 32x32x64 | Output: 16x16x64 | RF: 5x5
             nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout2d(dropout),
         )
 
         ## Convolution Block2
         self.conv2 =  nn.Sequential(
-            nn.Conv2d(32, 64, 3,  padding=1, bias = False), # Input: 16x16x32 | Output: 16x16x32 | RF: 9x9
+            nn.Conv2d(64, 64, 3,  padding=1, bias = False), # Input: 16x16x64 | Output: 16x16x32 | RF: 9x9
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout2d(dropout),
@@ -65,15 +67,15 @@ class Net(nn.Module):
 
         #Convolution Block4        
         self.conv4 = nn.Sequential(
-            nn.Conv2d(32, 32, 3, padding=1, bias = False), # Input: 4x4x16 | Output: 4x4x32 | RF: 93x93
+            nn.Conv2d(32, 64, 3, padding=1, bias = False), # Input: 4x4x32 | Output: 4x4x64 | RF: 93x93
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout2d(dropout),
 
             ## Depthwise seperable Convolution2
-            nn.Conv2d(32,32, 3,  padding=1,groups=32 ,bias = False),# Input: 4x4x16 | Output: 4x4x32 | RF: 125x125
+            nn.Conv2d(64,64, 3,  padding=1,groups=64 ,bias = False),# Input: 4x4x64 | Output: 4x4x64 | RF: 125x125
 
-            nn.Conv2d(32, 10, 1, padding=1, bias = False),          # Input: 4x4x32| Output: 6x6x10 | RF: 125x125
+            nn.Conv2d(64, 10, 1, padding=1, bias = False),          # Input: 4x4x64| Output: 6x6x10 | RF: 125x125
             nn.ReLU(),
             nn.BatchNorm2d(10),
             nn.Dropout2d(dropout),
