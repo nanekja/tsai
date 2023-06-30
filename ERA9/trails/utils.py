@@ -6,8 +6,8 @@ import torchvision
 from torch.utils.data import Dataset
 
 
-class Cifar10SearchDataset(torchvision.datasets.CIFAR10):
-    def __init__(self, root="./data/cifar10", train=True, download=True, transform=None):
+class Cifar10Dataset(torchvision.datasets.CIFAR10):
+    def __init__(self, root="~/data/cifar10", train=True, download=True, transform=None):
         super().__init__(root=root, train=train, download=download, transform=transform)
 
     def __getitem__(self, index):
@@ -17,7 +17,8 @@ class Cifar10SearchDataset(torchvision.datasets.CIFAR10):
             transformed = self.transform(image=image)
             image = transformed["image"]
 
-        return image, label
+        image = np.transpose(image, (2,0,1)).astype(np.float32)
+        return torch.tensor(image, dtype=torch.float), label
 
 def get_mean_and_std(exp_data):
     '''Calculate the mean and std for normalization'''
@@ -29,57 +30,12 @@ def get_mean_and_std(exp_data):
     print(' - Var:', np.var(exp_data, axis=(0,1,2)) / 255.)
     return np.mean(exp_data, axis=(0,1,2)) / 255., np.std(exp_data, axis=(0,1,2)) / 255.
 
-def unnormalize(img):
-  img = img.numpy().astype(dtype=np.float32)
-  
-  for i in range(img.shape[0]):
-    img[i] = (img[i]*std[i])+mean[i]
-  
-  return np.transpose(img, (1,2,0))
+def imshow(img):
+    img = img / 2 + 0.5     # unnormalize
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
 
-def imgshow(images, labels):
-    num_classes = 10
-    # display 10 images from each category. 
-    class_names = ['airplane','automobile','bird','cat','deer',
-                'dog','frog','horse','ship','truck']
-    r, c = 10, 11
-    n = 5
-    fig = plt.figure(figsize=(15,15))
-    fig.subplots_adjust(hspace=0.2, wspace=0.2)
-    for i in range(num_classes):
-        idx = np.random.choice(np.where(labels[:]==i)[0], n)
-        ax = plt.subplot(r, c, i*c+1)
-        ax.text(-1.5, 0.5, class_names[i], fontsize=14)
-        plt.axis('off')
-        for j in range(1, n+1):
-            plt.subplot(r, c, i*c+j+1)
-            plt.imshow(unnormalize(images[idx[j-1]]), interpolation='none')
-            plt.axis('off')
-    plt.show()
-
-def plot_data(data, rows, cols):
-    """Randomly plot the images from the dataset for vizualization
-
-    Args:
-        data (instance): torch instance for data loader
-        rows (int): number of rows in the plot
-        cols (int): number of cols in the plot
-    """
-    figure = plt.figure(figsize=(cols*2,rows*3))
-    for i in range(1, cols*rows + 1):
-        k = np.random.randint(0,50000)
-        figure.add_subplot(rows, cols, i) # adding sub plot
-
-        img, label = data[k]
-        
-        plt.imshow(img)
-        plt.axis('off')
-        plt.title(f'Class: {label} '+data.classes[label])
-
-    plt.tight_layout()
-    plt.show()
-
-    
+   
 def draw_graphs(train_losses, train_acc, test_losses, test_acc):
     t = [t_items.item() for t_items in train_losses]
     fig, axs = plt.subplots(2,2,figsize=(15,10))

@@ -72,20 +72,20 @@ class Net(nn.Module):
         ) # Input: 8x8x64 | Output: 6x6x32 | RF: 35 [27+(3-1)*4]
 
         self.convblock9 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1, stride = 2, bias=False),
+            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=1, stride = 2, bias=False),
             nn.ReLU(),
 #            nn.BatchNorm2d(32),
 #            nn.Dropout(dropout_value)
-        ) # Input: 6x6x32 | Output: 4x4x64 | RF: 43 [35+(3-1)*4]
+        ) # Input: 6x6x32 | Output: 4x4x32 | RF: 43 [35+(3-1)*4]
 
         
         # OUTPUT BLOCK
         self.gap = nn.Sequential(
             nn.AdaptiveAvgPool2d(1)
-        )  # Input: 4x4x64 | Output: 1x1x64 | RF: 67 [43+(4-1)*8]
+        )  # Input: 4x4x64 | Output: 1x1x32 | RF: 67 [43+(4-1)*8]
 
         self.fc = nn.Sequential(
-            nn.Linear(64, 10)
+            nn.Linear(32, 10)
         )
 
 
