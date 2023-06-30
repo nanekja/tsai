@@ -23,12 +23,12 @@ model.py\
 utils.py
 
 ### Results:
-* Parameters: 46876
-* Epochs: 15
-* Best Training Accuracy: 75.04
-* Best Test Accuracy: 77.41
+* Parameters: 184096
+* Epochs: 100
+* Best Training Accuracy: 74.79
+* Best Test Accuracy: 85.2
 * Graphs:
-  ![image](https://github.com/nanekja/tsai/assets/12238843/e0a4534a-b33a-49ac-91a8-0f7b828767f5)
+  
 
 * MisClassified Images:\
   ![image](https://github.com/nanekja/tsai/assets/12238843/d87c4d64-a375-4fd5-823f-edcf821c5725)
