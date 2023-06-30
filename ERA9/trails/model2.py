@@ -10,100 +10,103 @@ dropout_value = 0.1
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        # CONVOLUTION BLOCK 1
-        self.convblock1 = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding=1, stride=1, bias=False),
+        
+        ## Convolution Block1
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(3, 32, 3, padding=1, bias = False),  # Input: 32x32x3 | Output: 32x32x32 | RF: 3x3
             nn.ReLU(),
             nn.BatchNorm2d(32),
-            nn.Dropout(dropout_value)
-        ) # Input: 32x32x3 | Output: 32x32x32 | RF: 3 [1+(3-1)*1]
- 
-        self.convblock2 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1, stride=1, bias=False),
+            nn.Dropout2d(dropout),
+
+            nn.Conv2d(32, 64, 3, padding=1, bias = False), # Input: 32x32x32 | Output: 32x32x64 | RF: 5x5
             nn.ReLU(),
             nn.BatchNorm2d(64),
-            nn.Dropout(dropout_value)
-        ) # Input: 32x32x32 | Output: 32x32x64 | RF: 5 [3+(3-1)*1]
-
-        self.convblock3 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(3, 3), padding=0, stride=2, bias=False),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(dropout_value)
-        ) # Input: 32x32x64 | Output: 16x16x32 | RF: 7 [5+(3-1)*1]
-
-
-        # CONVOLUTION BLOCK 2
-        self.convblock4 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=1, stride=1, dilation=2,  bias=False),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(dropout_value)
-        ) # Input: 16x16x32 | Output: 16x16x32 | RF: 11 [7+(3-1)*2]
+            nn.Dropout2d(dropout)
+        )
         
-        self.convblock5 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1, stride=1, dilation=2, bias=False),
+        ## Transition Block1
+        self.trans1 = nn.Sequential(
+            nn.Conv2d(64, 32,1, stride=2), # Input: 32x32x64 | Output: 16x16x32 | RF: 5x5
+            nn.ReLU(),
+        )
+
+        ## Convolution Block2
+        self.conv2 =  nn.Sequential(
+            nn.Conv2d(32, 32, 3,  padding=1, bias = False), # Input: 16x16x32 | Output: 16x16x32 | RF: 9x9
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout2d(dropout),
+
+            ## Depthwise Seperable Convolution1
+            nn.Conv2d(32,32, 3,  padding=1,groups=32 ,bias = False),  # Input: 16x16x32 | Output: 16x16x32 | RF: 13x13
+            nn.Conv2d(32, 64, 1, padding=1, bias = False),   # Input: 16x16x32 | Output: 18x18x64 | RF: 13x13
             nn.ReLU(),
             nn.BatchNorm2d(64),
-            nn.Dropout(dropout_value)
-        ) # Input: 16x16x32 | Output: 16x16x64 | RF: 15 [11+(3-1)*2]
+            nn.Dropout2d(dropout),
+        )
+        
+        #Transition Block2
+        self.trans2 = nn.Sequential(
 
-        self.convblock6 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(3, 3), padding=0, stride=2, dilation=2, bias=False),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(dropout_value)
-        ) # Input: 16x16x64 | Output: 8x8x32 | RF: 19 [15+(3-1)*2]
+            nn.Conv2d(64, 32, 1, stride=2), # Input: 18x18x32 | Output: 9x9x64 | RF: 13x13
+            nn.ReLU()
+        )
 
-
-        # CONVOLUTION BLOCK 3
-        self.convblock7 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1, stride = 1, bias=False),
+        #Convolution Block3
+        self.conv3 = nn.Sequential(
+            
+            ## Dilation Block
+            nn.Conv2d(32, 64, 3,  padding=1, bias = False,dilation=2), # Input: 9x9x64 | Output: 7x7x64 | RF: 29x29
             nn.ReLU(),
             nn.BatchNorm2d(64),
-            nn.Dropout(dropout_value)
-        ) # Input: 8x8x32 | Output: 8x8x64 | RF: 27 [19+(3-1)*4]
-        
-        self.convblock8 = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(3, 3), padding=0, stride = 1, groups=32, bias=False),
+            nn.Dropout2d(dropout),
+
+            nn.Conv2d(64, 64, 3,  padding=1, bias = False),  # Input: 7x7x64| Output: 7x7x64 | RF: 45x45
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout2d(dropout),
+        )
+
+        #Transition Block3
+        self.trans3 = nn.Sequential(
+
+            nn.Conv2d(64, 16, 1, stride=2), # Input: 7x7x64| Output: 4x4x16 | RF: 61x61
+            nn.ReLU()
+        )
+
+        #Convolution Block4        
+        self.conv4 = nn.Sequential(
+            nn.Conv2d(16, 32, 3, padding=1, bias = False), # Input: 4x4x16 | Output: 4x4x32 | RF: 93x93
             nn.ReLU(),
             nn.BatchNorm2d(32),
-            nn.Dropout(dropout_value)
-        ) # Input: 8x8x64 | Output: 6x6x32 | RF: 35 [27+(3-1)*4]
+            nn.Dropout2d(dropout),
 
-        self.convblock9 = nn.Sequential(
-            nn.Conv2d(in_channels=32, out_channels=32, kernel_size=(3, 3), padding=1, stride = 2, bias=False),
+            ## Depthwise seperable Convolution2
+            nn.Conv2d(32,32, 3,  padding=1,groups=32 ,bias = False),# Input: 4x4x16 | Output: 4x4x32 | RF: 125x125
+            nn.Conv2d(32, 10, 1, padding=1, bias = False),          # Input: 4x4x32| Output: 6x6x10 | RF: 125x125
             nn.ReLU(),
-#            nn.BatchNorm2d(32),
-#            nn.Dropout(dropout_value)
-        ) # Input: 6x6x32 | Output: 4x4x32 | RF: 43 [35+(3-1)*4]
+            nn.BatchNorm2d(10),
+            nn.Dropout2d(dropout),
+        )
 
-        
-        # OUTPUT BLOCK
+        ## Output Block
         self.gap = nn.Sequential(
             nn.AdaptiveAvgPool2d(1)
-        )  # Input: 4x4x64 | Output: 1x1x32 | RF: 67 [43+(4-1)*8]
-
-        self.fc = nn.Sequential(
-            nn.Linear(32, 10)
-        )
+        ) 
 
 
     def forward(self, x):
-        x = self.convblock1(x)
-        x = self.convblock2(x)
-        x = self.convblock3(x)
+        x = self.conv1(x)
+        x = self.trans1(x)
 
-        x = self.convblock4(x)
-        x = self.convblock5(x)
-        x = self.convblock6(x)
+        x = self.conv2(x) 
+        x = self.trans2(x) 
 
-        x = self.convblock7(x)
-        x = self.convblock8(x)
-        x = self.convblock9(x)
+        x = self.conv3(x) 
+        x = self.trans3(x)
 
+        x = self.conv4(x)
         x = self.gap(x)
-        x = x.view(-1, 32)
-        x = self.fc(x)
 
-        return x
+        x = x.view(-1,10)
+        return F.log_softmax(x,dim=1)
