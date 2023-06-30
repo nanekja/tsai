@@ -28,7 +28,8 @@ utils.py
 * Best Training Accuracy: 74.79
 * Best Test Accuracy: 85.2
 * Graphs:
-  image.png
+  ![image](https://github.com/nanekja/tsai/assets/12238843/45eac019-ba24-4e34-ae64-2e79c9395a5a)
+
 
 ### Analysis:
 
