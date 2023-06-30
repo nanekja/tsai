@@ -33,7 +33,7 @@ def unnormalize(img):
   img = img.numpy().astype(dtype=np.float32)
   
   for i in range(img.shape[0]):
-    img[i] = (img[i]*sdev[i])+mean[i]
+    img[i] = (img[i]*std[i])+mean[i]
   
   return np.transpose(img, (1,2,0))
 
