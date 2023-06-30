@@ -6,6 +6,19 @@ from torchvision.utils import make_grid
 from torch.utils.data import Dataset
 
 
+class Cifar10SearchDataset(torchvision.datasets.CIFAR10):
+    def __init__(self, root="./data/cifar10", train=True, download=True, transform=None):
+        super().__init__(root=root, train=train, download=download, transform=transform)
+
+    def __getitem__(self, index):
+        image, label = self.data[index], self.targets[index]
+
+        if self.transform is not None:
+            transformed = self.transform(image=image)
+            image = transformed["image"]
+
+        return image, label
+
 def get_mean_and_std(exp_data):
     '''Calculate the mean and std for normalization'''
     print(' - Dataset Numpy Shape:', exp_data.shape)
@@ -16,6 +29,33 @@ def get_mean_and_std(exp_data):
     print(' - Var:', np.var(exp_data, axis=(0,1,2)) / 255.)
     return np.mean(exp_data, axis=(0,1,2)) / 255., np.std(exp_data, axis=(0,1,2)) / 255.
 
+def unnormalize(img):
+  img = img.numpy().astype(dtype=np.float32)
+  
+  for i in range(img.shape[0]):
+    img[i] = (img[i]*sdev[i])+mean[i]
+  
+  return np.transpose(img, (1,2,0))
+
+def imgshow(images):
+    num_classes = 10
+    # display 10 images from each category. 
+    class_names = ['airplane','automobile','bird','cat','deer',
+                'dog','frog','horse','ship','truck']
+    r, c = 10, 11
+    n = 5
+    fig = plt.figure(figsize=(15,15))
+    fig.subplots_adjust(hspace=0.2, wspace=0.2)
+    for i in range(num_classes):
+        idx = np.random.choice(np.where(labels[:]==i)[0], n)
+        ax = plt.subplot(r, c, i*c+1)
+        ax.text(-1.5, 0.5, class_names[i], fontsize=14)
+        plt.axis('off')
+        for j in range(1, n+1):
+            plt.subplot(r, c, i*c+j+1)
+            plt.imshow(unnormalize(images[idx[j-1]]), interpolation='none')
+            plt.axis('off')
+    plt.show()
 
 def plot_data(data, rows, cols):
     """Randomly plot the images from the dataset for vizualization
