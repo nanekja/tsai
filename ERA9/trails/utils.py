@@ -37,7 +37,7 @@ def unnormalize(img):
   
   return np.transpose(img, (1,2,0))
 
-def imgshow(images):
+def imgshow(images, labels):
     num_classes = 10
     # display 10 images from each category. 
     class_names = ['airplane','automobile','bird','cat','deer',
