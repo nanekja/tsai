@@ -29,19 +29,19 @@ class Net(nn.Module):
 
         ## Convolution Block2
         self.conv2 =  nn.Sequential(
-            nn.Conv2d(32, 32, 3,  padding=1, bias = False), # Input: 16x16x32 | Output: 16x16x32 | RF: 9x9
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout2d(dropout),
-
-            ## Depthwise Seperable Convolution1
-            nn.Conv2d(32,32, 3,  padding=1,groups=32 ,bias = False),  # Input: 16x16x32 | Output: 16x16x32 | RF: 13x13
-            nn.Conv2d(32, 64, 1, padding=1, bias = False),   # Input: 16x16x32 | Output: 18x18x64 | RF: 13x13
+            nn.Conv2d(32, 64, 3,  padding=1, bias = False), # Input: 16x16x32 | Output: 16x16x32 | RF: 9x9
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout2d(dropout),
 
-            nn.Conv2d(64, 32, 1, stride=2), # Input: 18x18x32 | Output: 9x9x64 | RF: 13x13
+            ## Depthwise Seperable Convolution1
+            nn.Conv2d(64,64, 3,  padding=1,groups=64 ,bias = False),  # Input: 16x16x32 | Output: 16x16x32 | RF: 13x13
+            nn.Conv2d(64, 128, 1, padding=1, bias = False),   # Input: 16x16x32 | Output: 18x18x64 | RF: 13x13
+            nn.ReLU(),
+            nn.BatchNorm2d(128),
+            nn.Dropout2d(dropout),
+
+            nn.Conv2d(128, 32, 1, stride=2), # Input: 18x18x32 | Output: 9x9x64 | RF: 13x13
             nn.ReLU()
         )
 
@@ -59,13 +59,13 @@ class Net(nn.Module):
             nn.BatchNorm2d(64),
             nn.Dropout2d(dropout),
 
-            nn.Conv2d(64, 16, 1, stride=2), # Input: 7x7x64| Output: 4x4x16 | RF: 61x61
+            nn.Conv2d(64, 32, 1, stride=2), # Input: 7x7x64| Output: 4x4x32 | RF: 61x61
             nn.ReLU()
         )
 
         #Convolution Block4        
         self.conv4 = nn.Sequential(
-            nn.Conv2d(16, 32, 3, padding=1, bias = False), # Input: 4x4x16 | Output: 4x4x32 | RF: 93x93
+            nn.Conv2d(32, 32, 3, padding=1, bias = False), # Input: 4x4x16 | Output: 4x4x32 | RF: 93x93
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout2d(dropout),
@@ -80,8 +80,8 @@ class Net(nn.Module):
         )
 
         ## Output Block
-        self.gap = nn.Sequential(
-            nn.AdaptiveAvgPool2d(1)
+        self.gap = nn.Sequential(nn.AdaptiveAvgPool2d(1)
+        
         ) 
 
 
