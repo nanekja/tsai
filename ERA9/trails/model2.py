@@ -6,7 +6,7 @@ from torchsummary import summary
 from tqdm import tqdm
 from utils import *
 
-dropout_value = 0.1
+dropout = 0.1
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
