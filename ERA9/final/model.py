@@ -37,7 +37,7 @@ class Net(nn.Module):
             nn.Dropout2d(dropout),
 
             ## Depthwise Seperable Convolution1
-            nn.Conv2d(64,64, 3,  padding=1,groups=64 ,bias = False),  # Input: 16x16x32 | Output: 16x16x32 | RF: 13x13
+            nn.Conv2d(64, 64, 3,  padding=1,groups=64 ,bias = False),  # Input: 16x16x32 | Output: 16x16x32 | RF: 13x13
             nn.Conv2d(64, 128, 1, padding=1, bias = False),   # Input: 16x16x32 | Output: 18x18x64 | RF: 13x13
             nn.ReLU(),
             nn.BatchNorm2d(128),
@@ -69,7 +69,7 @@ class Net(nn.Module):
         self.conv4 = nn.Sequential(
             nn.Conv2d(32, 64, 3, padding=1, bias = False), # Input: 4x4x32 | Output: 4x4x64 | RF: 93x93
             nn.ReLU(),
-            nn.BatchNorm2d(32),
+            nn.BatchNorm2d(64),
             nn.Dropout2d(dropout),
 
             ## Depthwise seperable Convolution2
@@ -77,8 +77,8 @@ class Net(nn.Module):
 
             nn.Conv2d(64, 10, 1, padding=1, bias = False),          # Input: 4x4x64| Output: 6x6x10 | RF: 125x125
             nn.ReLU(),
-            nn.BatchNorm2d(10),
-            nn.Dropout2d(dropout),
+            #nn.BatchNorm2d(10),
+            #nn.Dropout2d(dropout),
         )
 
         ## Output Block
