@@ -28,16 +28,10 @@ utils.py
 * Best Training Accuracy: 74.79
 * Best Test Accuracy: 85.2
 * Graphs:
-  
-
-* MisClassified Images:\
-  ![image](https://github.com/nanekja/tsai/assets/12238843/d87c4d64-a375-4fd5-823f-edcf821c5725)
-
+  image.png
 
 ### Analysis:
 
-The results of Batch Normalization is superior over other normalization techniques as the achieved accuracy is higher and has relatively faster convergence.
-The Layer Normalization comes next in the order of efficiency as its accuracy is better than the Group Normalization.
-
+All the mentioned criteria listed under targets above is met. Implemented Dilated Convolution and as well as the Depthwise Convolution. didn't use MAx Pooling at all and have maintained the architecture and executed to achieve > 85% validation accuracy with < 200K Parameters.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
