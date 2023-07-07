@@ -35,7 +35,7 @@ Target Accuracy: 90%\
 
 ### Files:
 S10.ipynb\
-Other files part of https://github.com/nanekja/pytorch_utils \
+Other files part of https://github.com/nanekja/pytorch_utils 
 
 ### Results:
 * Parameters: 6573120
@@ -61,6 +61,6 @@ Plot the corresponding loss value and pick the maximum learning rate afteer whic
 As seen in the above image the second bottom appears at around 0.001 therefore the max learning rate is 0.001 of One cycle learning rate policy.
 
 ### Results of training
-Max accuracy acheived = 90.9808% in 24 epochs
+Max accuracy acheived = 90.98% in 24 epochs
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
