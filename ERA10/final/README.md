@@ -43,18 +43,20 @@ Other files part of https://github.com/nanekja/pytorch_utils \
 * Best Training Accuracy: 93.96
 * Best Test Accuracy: 90.98
 * Graphs:
-  
+  ![image](https://github.com/nanekja/tsai/assets/12238843/e4ae0ccb-3a44-47f6-893a-72d0bd65001b)
+
 
 
 ### Analysis:
 
 This test is performed to find out the maximum learning rate which can be used to start the training with. In the case of the One Cycle Learning rate policy it is used to determine the peak learning rate as per the algorithm. \
 
-Method: \
+Method: 
 
 Start of with a learning rate close to zero and with each iteration(400 to 500 iterations) increase the Learning rate in an exponential manner
 Plot the corresponding loss value and pick the maximum learning rate afteer which the learning rate \
 
+![image](https://github.com/nanekja/tsai/assets/12238843/ea54a25a-235c-4859-a427-a1f400913ac1)
 
 As seen in the above image the second bottom appears at around 0.001 therefore the max learning rate is 0.001 of One cycle learning rate policy.
 
