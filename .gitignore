@@ -1,3 +1,7 @@
 # ignore ALL files in ANY directory named temp
 ERA10/trails/data
 ERA10/trails/pytorch_utils
+ERA10/final/data
+ERA11/trails/data
+ERA11/final/data
+
