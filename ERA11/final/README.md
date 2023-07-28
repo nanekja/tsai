@@ -14,12 +14,10 @@ Other files part of https://github.com/nanekja/pytorch_utils
 ### Results:
 * Parameters: 11,173,962
 * Epochs: 20
-* Best Training Accuracy: 
-* Best Test Accuracy: 
+* Best Training Accuracy: 86.04%
+* Best Test Accuracy: 89.42%
 * Graphs:
-  
-
-
+ 
 
 ### Analysis:
 
