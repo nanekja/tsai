@@ -22,12 +22,12 @@ Other files part of https://github.com/nanekja/pytorch_utils
 
 ### Analysis:
 
-This test is performed to leverage GradCam and also to find out the maximum learning rate which can be used to start the training with. In the case of the One Cycle Learning rate policy it is used to determine the peak learning rate as per the algorithm. \
+This test is performed to leverage GradCam and also to find out the maximum learning rate which can be used to start the training with. In the case of the One Cycle Learning rate policy it is used to determine the peak learning rate as per the algorithm. 
 
 Method: 
 
 Start of with a learning rate close to zero and with each iteration(400 to 500 iterations) increase the Learning rate in an exponential manner
-Plot the corresponding loss value and pick the maximum learning rate afteer which the learning rate \
+Plot the corresponding loss value and pick the maximum learning rate afteer which the learning rate 
 
 ### 10 Mis-Classified images:
 ![image](https://github.com/nanekja/tsai/assets/12238843/0017110c-2fa3-44be-9bd0-a1e32f138cba)
@@ -45,8 +45,6 @@ Plot the corresponding loss value and pick the maximum learning rate afteer whic
 ![image](https://github.com/nanekja/tsai/assets/12238843/2479c586-199f-4c0b-b754-5e46e4b15da2)
 ![image](https://github.com/nanekja/tsai/assets/12238843/502094dc-40ce-4851-a3af-22ac0486aaa8)
 
-
-As seen in the above image the second bottom appears at around 0.001 therefore the max learning rate is 0.001 of One cycle learning rate policy.
 
 ### Results of training
 Max accuracy acheived = 89.42% in 20 epochs and GradCam usage was shown
