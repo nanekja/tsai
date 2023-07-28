@@ -29,11 +29,11 @@ Method:
 Start of with a learning rate close to zero and with each iteration(400 to 500 iterations) increase the Learning rate in an exponential manner
 Plot the corresponding loss value and pick the maximum learning rate afteer which the learning rate \
 
-10 Mis-Classified images:
+### 10 Mis-Classified images:
 ![image](https://github.com/nanekja/tsai/assets/12238843/0017110c-2fa3-44be-9bd0-a1e32f138cba)
 
 
-GradCam 10 Misclassified images:
+### GradCam 10 Misclassified images:
 ![image](https://github.com/nanekja/tsai/assets/12238843/6b45f141-b88f-47bb-a803-67bc858c8aa9)
 ![image](https://github.com/nanekja/tsai/assets/12238843/1008d8b5-4e6e-43ca-b212-3498d7c09056)
 ![image](https://github.com/nanekja/tsai/assets/12238843/00361c5f-c1fa-421b-9812-bece53a68b84)
