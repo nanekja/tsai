@@ -17,7 +17,8 @@ Other files part of https://github.com/nanekja/pytorch_utils
 * Best Training Accuracy: 86.04%
 * Best Test Accuracy: 89.42%
 * Graphs:
- 
+ ![image](https://github.com/nanekja/tsai/assets/12238843/f3cda075-5253-4b5e-9e91-d15abbf653cb)
+
 
 ### Analysis:
 
@@ -29,6 +30,7 @@ Start of with a learning rate close to zero and with each iteration(400 to 500 i
 Plot the corresponding loss value and pick the maximum learning rate afteer which the learning rate \
 
 GradCam Misclassified images:
+![image](https://github.com/nanekja/tsai/assets/12238843/6b45f141-b88f-47bb-a803-67bc858c8aa9)
 
 
 As seen in the above image the second bottom appears at around 0.001 therefore the max learning rate is 0.001 of One cycle learning rate policy.
