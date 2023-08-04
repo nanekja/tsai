@@ -17,7 +17,7 @@ allow users to upload new images, as well as provide 10 example images
 ask how many top classes are to be shown (make sure the user cannot enter more than 10)
 
 ### Files:
-S12.ipynb\
+S12.ipynb
 https://github.com/nanekja/tsai/tree/master/ERA12/final
 Other files part of https://github.com/nanekja/pytorch_utils 
 
